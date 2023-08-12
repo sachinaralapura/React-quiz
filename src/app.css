@@ -1,0 +1,168 @@
+.App {
+  height: 100vh;
+  display: flex;
+  background-color: #010115;
+  color: white;
+  box-sizing: border-box;
+}
+.main {
+  width: 75%;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.8), #010115),
+    url("../Assests/back.jpg");
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.top {
+  /* height: 40%;
+  width: 100%; */
+  text-align: center;
+}
+.timer {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  border: solid white 2px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 25px;
+  font-weight: 800;
+}
+
+.bottom {
+  height: 60%;
+  width: 100%;
+  border: 2px solid white;
+}
+
+.questionAnswer {
+  border: solid white 2px;
+  height: 100%;
+  display: flex;
+  text-align: center;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.question {
+  width: 80%;
+  background: linear-gradient(to bottom, rgb(3, 3, 69), black);
+  border: solid rgb(255, 255, 255) 2px;
+  padding: 25px;
+  border-radius: 10px;
+  font-size: 20px;
+  font-weight: 300;
+}
+
+.answers {
+  width: 100%;
+  /* border:green solid 2px; */
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.answer {
+  border: solid rgb(255, 255, 255) 2px;
+  width: 40%;
+  background: linear-gradient(to bottom, rgb(3, 3, 69), black);
+  padding: 20px 10px;
+  border-radius: 10px;
+  cursor: pointer;
+  margin: 20px 20px 0px 10px;
+}
+
+.answer.active{
+  background: black;
+}
+
+.answer:hover {
+  background: black;
+}
+
+
+.answer.correct {
+  animation: correct 3s ease forwards;
+}
+
+@keyframes correct {
+  from {
+    background: linear-gradient(to bottom, rgb(3, 3, 69), black);
+  }
+  10%,
+  30%,
+  50% {
+    background: rgb(5, 5, 120);
+  }
+  20%,
+  40% {
+    background: black;
+  }
+  to {
+    background: green;
+  }
+}
+
+.answer.wrong {
+  animation: wrong 3s ease forwards;
+}
+
+@keyframes wrong {
+  from {
+    background: linear-gradient(to bottom, rgb(3, 3, 69), black);
+  }
+  10%,
+  30%,
+  50% {
+    background: rgb(5, 5, 120);
+  }
+  20%,
+  40% {
+    background: black;
+  }
+  to {
+    background: crimson ;
+  }
+}
+
+.pyramid {
+  width: 25%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.moneylist {
+  list-style: none;
+  width: 100%;
+  padding: 20px;
+}
+
+.moneylistItem {
+  display: flex;
+  align-items: center;
+  padding: 15px;
+  border-radius: 5px;
+}
+.moneylistItem:hover {
+  background-color: black;
+}
+
+.moneylistItem.active {
+  background-color: rgb(3, 3, 72);
+}
+.moneyListItemNumber {
+  font: 18px;
+  font-weight: 100;
+  width: 40%;
+  text-align: center;
+}
+.moneyListItemAmount {
+  font-size: 20px;
+  font-weight: 300;
+}
