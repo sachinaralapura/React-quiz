@@ -64,6 +64,7 @@ const amountPyramid = [
 function App() {
   const [questionNumber, setQuestionNumber] = useState(1);
   const [data, setData] = useState([]);
+  const [totalAmount, setAmount] = useState(0);
   const [timeOut, settimeout] = useState(false);
 
   useEffect(() => {
@@ -81,17 +82,23 @@ function App() {
   return (
     <div className="App">
       <div className="main">
-        <div className="top">
-          <div className="timer">30</div>
-        </div>
-        <div className="bottom">
-          <QandA
-            data={data}
-            questionNumber={questionNumber}
-            setQuestionNumber={setQuestionNumber}
-            settimeout={settimeout}
-          ></QandA>
-        </div>
+        {timeOut ? (
+          <h1>Total earned : {totalAmount}</h1>
+        ) : (
+          <>
+            <div className="top">
+              <div className="timer">30</div>
+            </div>
+            <div className="bottom">
+              <QandA
+                data={data}
+                questionNumber={questionNumber}
+                setQuestionNumber={setQuestionNumber}
+                settimeout={settimeout}
+              ></QandA>
+            </div>
+          </>
+        )}
       </div>
       <div className="pyramid">
         <ul className="moneylist">

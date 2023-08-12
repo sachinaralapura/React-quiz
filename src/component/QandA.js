@@ -5,6 +5,7 @@ function QandA({ data, questionNumber, setQuestionNumber, settimeout }) {
   const [options, setOptions] = useState();
   const [selectedOption, setSelectedOptin] = useState(null);
   const [className, setClassName] = useState("answer");
+  const [chance, setChance] = useState(3);
   //------------------------------------------------------------------------------------------
 
   useEffect(() => {
@@ -34,6 +35,13 @@ function QandA({ data, questionNumber, setQuestionNumber, settimeout }) {
     //setting question and option state
     setQuestion(temp?.question);
     setOptions(shuffledArray);
+    // setting the selected option back to null
+    setSelectedOptin(null);
+
+    // checking the number of chances
+    if(chance === 0){
+        settimeout(true)
+    }
   }, [data, questionNumber]);
 
   // ----------------------------------------------------------------------------------------------
@@ -49,10 +57,15 @@ function QandA({ data, questionNumber, setQuestionNumber, settimeout }) {
         }, 3000);
       } else {
         setClassName("answer wrong");
+        setChance((prev) => prev - 1);
+
         setTimeout(() => {
           setQuestionNumber((prev) => {
-            if (prev != 1) return prev - 1;
-            return prev;
+            if (prev !== 1) return prev - 1;
+            else {
+              settimeout(true);
+              return prev;
+            }
           });
         }, 3000);
       }
@@ -61,6 +74,7 @@ function QandA({ data, questionNumber, setQuestionNumber, settimeout }) {
 
   return (
     <div className="questionAnswer">
+      {chance}
       <div className="question">{question}</div>
       <div className="answers">
         {options?.map((option, index) => (
