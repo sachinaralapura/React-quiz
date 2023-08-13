@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 
-function QandA({ data, questionNumber, setQuestionNumber, settimeout }) {
+function QandA({ data, questionNumber, setQuestionNumber, gameover }) {
   const [question, setQuestion] = useState("");
   const [options, setOptions] = useState();
   const [selectedOption, setSelectedOptin] = useState(null);
   const [className, setClassName] = useState("answer");
   const [chance, setChance] = useState(3);
   //------------------------------------------------------------------------------------------
-
+  //---------------------------------------------------------------------
   useEffect(() => {
     // accessing single question and answer set
     const temp = data[questionNumber - 1];
@@ -39,10 +39,11 @@ function QandA({ data, questionNumber, setQuestionNumber, settimeout }) {
     setSelectedOptin(null);
 
     // checking the number of chances
-    if(chance === 0){
-        settimeout(true)
+    if (chance === 0) {
+      gameover(true);
     }
-  }, [data, questionNumber]);
+    // set new timer
+  }, [gameover, data, questionNumber]);
 
   // ----------------------------------------------------------------------------------------------
 
@@ -63,13 +64,13 @@ function QandA({ data, questionNumber, setQuestionNumber, settimeout }) {
           setQuestionNumber((prev) => {
             if (prev !== 1) return prev - 1;
             else {
-              settimeout(true);
+              gameover(true);
               return prev;
             }
           });
-        }, 3000);
+        }, 2000);
       }
-    }, 2000);
+    }, 1000);
   };
 
   return (

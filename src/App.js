@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import "./app.css";
 import QandA from "./component/QandA";
 import axios from "axios";
+import Timer from "./component/Timer";
 const amountPyramid = [
   {
     id: 14,
@@ -65,11 +66,17 @@ function App() {
   const [questionNumber, setQuestionNumber] = useState(1);
   const [data, setData] = useState([]);
   const [totalAmount, setAmount] = useState(0);
-  const [timeOut, settimeout] = useState(false);
+  const [gameOver, setGameOver] = useState(false);
+
+  useEffect(() => {
+    setAmount(amountPyramid?.find((m)=> m?.id === questionNumber -1)?.amount || 0)
+  }, [questionNumber]);
 
   useEffect(() => {
     axios
-      .get("https://opentdb.com/api.php?amount=14&category=18&type=multiple")
+      .get(
+        "https://opentdb.com/api.php?amount=14&category=18&type=multiple&difficulty=hard"
+      )
       .then((response) => {
         console.log(response.data.results);
         setData(response.data.results);
@@ -82,19 +89,24 @@ function App() {
   return (
     <div className="App">
       <div className="main">
-        {timeOut ? (
+        {gameOver ? (
           <h1>Total earned : {totalAmount}</h1>
         ) : (
           <>
             <div className="top">
-              <div className="timer">30</div>
+              <div className="timer">
+                <Timer
+                  setGameOver={setGameOver}
+                  questionNumber={questionNumber}
+                ></Timer>
+              </div>
             </div>
             <div className="bottom">
               <QandA
                 data={data}
                 questionNumber={questionNumber}
                 setQuestionNumber={setQuestionNumber}
-                settimeout={settimeout}
+                gameover={setGameOver}
               ></QandA>
             </div>
           </>
